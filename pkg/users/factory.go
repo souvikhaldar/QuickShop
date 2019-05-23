@@ -9,5 +9,9 @@ type user struct {
 	Gender    string `json:"gender"`
 }
 type response struct {
-	Response string `json:"response"`
+	UserID int32 `json:"user_id"`
+}
+
+type errorResponse struct {
+	Error string `json:"error"`
 }

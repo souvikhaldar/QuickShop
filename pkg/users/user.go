@@ -14,16 +14,17 @@ func AddNewUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	if er != nil {
 		fmt.Println("Error in unmarshalling the adduser request body ", er)
-		json.NewEncoder(w).Encode(&response{"Error: Unable to unamrshall the request body"})
+		http.Error(w, fmt.Sprintln("Error in unmarshalling the adduser request body ", er), 500)
 		return
 	}
-	var user_id int32
-	if err := db.DB.QueryRow(db.AddUser, u.FirstName, u.LastName, u.Email, u.Password, u.Age, u.Gender).Scan(&user_id); err != nil {
+	var userid int32
+	if err := db.DB.QueryRow(db.AddUser, u.FirstName, u.LastName, u.Email, u.Password, u.Age, u.Gender).Scan(&userid); err != nil {
 		er := fmt.Sprintf("Unable to add a new user: %s", err)
 		fmt.Println(err)
 		http.Error(w, er, 500)
 		return
 	}
-	fmt.Println("Successfully inserted user with userid:", user_id)
-	fmt.Fprintf(w, "Successfully inserted user with userid:%d\n", user_id)
+	fmt.Println("Successfully inserted user with userid:", userid)
+	json.NewEncoder(w).Encode(&response{userid})
+	return
 }
