@@ -12,8 +12,9 @@ func AddNewUser(w http.ResponseWriter, r *http.Request) {
 	var u user
 	er := json.NewDecoder(r.Body).Decode(&u)
 	//Allow CORS here By * or specific origin
-    w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
 	if er != nil {
 		fmt.Println("Error in unmarshalling the adduser request body ", er)
 		http.Error(w, fmt.Sprintln("Error in unmarshalling the adduser request body ", er), 500)
