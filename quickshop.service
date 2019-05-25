@@ -3,7 +3,6 @@ Description= Quickshop webserver Service
 After= network.target
 
 [Service]
-Type= Simple
 Restart= Always
 ExecStart= /home/ubuntu/Development/go/bin/http_server
 
