@@ -7,6 +7,7 @@ type user struct {
 	Password  string `json:"password"`
 	Age       int32  `json:"age"`
 	Gender    string `json:"gender"`
+	QR        []byte `json:"qr"`
 }
 type response struct {
 	UserID int32 `json:"user_id"`

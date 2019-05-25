@@ -8,17 +8,18 @@ import (
 )
 
 const (
-	host   = "localhost"
-	port   = 5432
-	user   = "souvik"
-	dbname = "quickshop"
+	host     = "localhost"
+	port     = 5432
+	user     = "postgres"
+	password = "postgres"
+	dbname   = "quickshop"
 )
 
 var DB *sql.DB
 
 func init() {
 	var err error
-	psql := fmt.Sprintf("host=%s port=%d user=%s dbname=%s sslmode=disable", host, port, user, dbname)
+	psql := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
 	DB, err = sql.Open("postgres", psql)
 	if err != nil {
 		panic(err)

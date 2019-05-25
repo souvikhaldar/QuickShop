@@ -18,7 +18,7 @@ func AddNewUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	var userid int32
-	if err := db.DB.QueryRow(db.AddUser, u.FirstName, u.LastName, u.Email, u.Password, u.Age, u.Gender).Scan(&userid); err != nil {
+	if err := db.DB.QueryRow(db.AddUser, u.FirstName, u.LastName, u.Email, u.Password, u.Age, u.Gender, u.QR).Scan(&userid); err != nil {
 		er := fmt.Sprintf("Unable to add a new user: %s", err)
 		fmt.Println(err)
 		http.Error(w, er, 500)
