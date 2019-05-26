@@ -1,0 +1,2 @@
+create table if not exists inventory (rfid_no text primary key,barcode text unique);
+create table if not exists users (user_id serial primary key,first_name text,last_name text,email text unique,password text,age integer,gender text,qr bytea);
