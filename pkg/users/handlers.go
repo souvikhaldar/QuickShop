@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 func AddNewUser(w http.ResponseWriter, r *http.Request) {
@@ -35,6 +37,10 @@ func AddNewUser(w http.ResponseWriter, r *http.Request) {
 
 func Signin(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("--Running in sign in handler--")
+	//Allow CORS here By * or specific origin
+	w.Header().Set("Content-Type", "application/json")
+	//Allow CORS here By * or specific origin
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	var s signin
 	if er := json.NewDecoder(r.Body).Decode(&s); er != nil {
 		err := fmt.Sprintln("Error in unmarshalling sign in request body: ", er.Error())
@@ -58,4 +64,30 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprint(w, false)
 	}
 	return
+}
+
+func GetUserDetails(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("--Running in GetUserDetails--")
+	//Allow CORS here By * or specific origin
+	w.Header().Set("Content-Type", "application/json")
+	//Allow CORS here By * or specific origin
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	userid := mux.Vars(r)["user_id"]
+	var u FetchUserDetails
+	if er := db.DB.QueryRow(db.GetUserDetails, userid).Scan(&u.UserID, &u.FirstName, &u.LastName, &u.Email, &u.Age, &u.Gender, &u.QR); er != nil {
+		err := fmt.Sprintln("Error in fetching the user details from db: ", er.Error())
+		fmt.Println(err)
+		http.Error(w, err, 500)
+		return
+	}
+
+	fmt.Println("User details recieved: ", u)
+
+	if er := json.NewEncoder(w).Encode(u); er != nil {
+		err := fmt.Sprintln("Error in Marshalling the userdetails: ", er.Error())
+		fmt.Println(err)
+		http.Error(w, err, 500)
+		return
+	}
+
 }

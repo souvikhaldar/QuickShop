@@ -21,3 +21,13 @@ type signin struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
+
+type FetchUserDetails struct {
+	UserID    string `json:"user_id"`
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
+	Email     string `json:"email"`
+	Age       int32  `json:"age"`
+	Gender    string `json:"gender"`
+	QR        []byte `json:"qr"`
+}

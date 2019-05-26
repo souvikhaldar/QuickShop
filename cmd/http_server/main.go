@@ -11,8 +11,9 @@ import (
 
 func main() {
 	router := mux.NewRouter()
-	router.HandleFunc("/signup", users.AddNewUser)
-	router.HandleFunc("/signin", users.Signin)
-	router.HandleFunc("/inventory", inventory.AddToInventory)
+	router.HandleFunc("/signup", users.AddNewUser).Methods("POST")
+	router.HandleFunc("/signin", users.Signin).Methods("POST")
+	router.HandleFunc("/inventory", inventory.AddToInventory).Methods("POST")
+	router.HandleFunc("/user/{user_id}/", users.GetUserDetails).Methods("GET")
 	log.Fatal(http.ListenAndServe(":8192", router))
 }
