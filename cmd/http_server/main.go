@@ -11,5 +11,6 @@ import (
 func main() {
 	router := mux.NewRouter()
 	router.HandleFunc("/signup", users.AddNewUser)
+	router.HandleFunc("/signin", users.Signin)
 	log.Fatal(http.ListenAndServe(":8192", router))
 }

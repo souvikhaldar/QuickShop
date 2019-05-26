@@ -16,3 +16,8 @@ type response struct {
 type errorResponse struct {
 	Error string `json:"error"`
 }
+
+type signin struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
