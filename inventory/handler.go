@@ -23,5 +23,5 @@ func AddToInventory(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err, 500)
 		return
 	}
-	fmt.Fprint(w, "Successfully inserted to inventory")
+	fmt.Fprint(w, "OK")
 }
