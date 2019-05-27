@@ -19,3 +19,7 @@ Steps are mentioned in the flowchart in the PPT.
 
 ## Link to API Documentation
 [Click here](https://documenter.getpostman.com/view/1921454/S1TN71n3?version=latest)
+
+## Youtube link to prototype video
+[Click here](https://youtu.be/eqWffgoPYUk)
+
